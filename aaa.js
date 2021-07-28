@@ -55,8 +55,12 @@ async function main() {
 
 const currentBranch = getGitBranch();
 
-main().catch(async err => {
-  error(err);
-  step(`切换回到 ${currentBranch} 分支`);
-  await run(`git`, [`checkout`, currentBranch]);
-});
+main()
+  .catch(async err => {
+    error(err);
+    step(`切换回到 ${currentBranch} 分支`);
+    await run(`git`, [`checkout`, currentBranch]);
+  })
+  .finally(() => {
+    notice(`完成辣`);
+  });
