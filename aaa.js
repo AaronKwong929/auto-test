@@ -10,6 +10,7 @@ const error = msg => console.log(chalk.bgRedBright(chalk.black(msg)));
 const run = (bin, args, opts = {}) =>
   execa(bin, args, {
     stdio: `inherit`,
+    argv0: `--color`,
     ...opts,
   });
 
