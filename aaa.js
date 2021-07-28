@@ -21,17 +21,10 @@ const getGitBranch = () => {
 async function main() {
   const currentBranch = getGitBranch();
 
-  const { message } = await prompt({
-    type: `input`,
-    name: `message`,
-    message: `请输入commit message`,
-  });
-
   step(`添加 git 追踪`);
   await run(`git`, [`add`, `.`]);
   await run(`git-cz`);
-  // await run(`git`, [`commit`, `-m`, message]);
-  // await run(`git`, [`push`]);
+  await run(`git`, [`push`]);
 
   // 切换到 dev 分支并拉取最新代码
   step(`切换到 dev 分支并拉取最新代码`);
