@@ -14,6 +14,7 @@ const run = (bin, args, opts = {}) =>
 const getGitBranch = () =>
   execa.commandSync('git rev-parse --abbrev-ref HEAD').stdout;
 
+  
 async function main() {
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
   if (stdout) {
