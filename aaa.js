@@ -1,11 +1,12 @@
 const chalk = require('chalk');
+chalk.enabled = true;
 const execa = require('execa');
 const { prompt } = require('enquirer');
 
 const versionRegex = /^\d+\.\d+\.\d+$/;
 const step = msg => console.log(chalk.bgYellowBright(chalk.black(msg)));
 // const success = msg => console.log(chalk.bgGreenBright(chalk.black(msg)));
-const success = msg => console.log(`\x1B[102m\x1B[30m${msg}\x1B[39m\x1B[49m`)
+const success = msg => console.log(`\x1B[102m\x1B[30m${msg}\x1B[39m\x1B[49m`);
 const error = msg => console.log(chalk.bgRedBright(chalk.black(msg)));
 
 const run = (bin, args, opts = {}) =>
