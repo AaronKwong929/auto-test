@@ -39,7 +39,8 @@ async function main() {
   await run(`git`, [`merge`, currentBranch]);
   success(`合并到 dev 分支完成`);
   step(`推送到远端`);
-  await run(`git`, [`push`], { stdio: `pipe` });
+  const res = await run(`git`, [`push`], { stdio: `pipe` });
+  console.log(res.stdout);
   success(`推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
   return;
 }
