@@ -44,6 +44,7 @@ async function main() {
   step('\n推送到远端');
   await run2(`git`, [`push`]);
 
+  
   success('\n推送 dev 完成，稍后 Jenkins 将启动构建并通知');
 
   step('\n切换回到 ${currentBranch} 分支');
