@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-chalk.enabled = true;
+chalk.level = 3;
 const execa = require('execa');
 const { prompt } = require('enquirer');
 
