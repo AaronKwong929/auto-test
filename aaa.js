@@ -28,7 +28,6 @@ async function main() {
   }
 
   await run(`git`, [`push`]);
-  notice(`run完git commit子进程颜色丢失`);
   step('\n切换到 dev 分支并拉取最新代码');
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
