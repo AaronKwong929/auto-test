@@ -22,12 +22,12 @@ async function main() {
 
     await run(`git-cz`);
     // await run(`git`, [`commit`, `-m`, `111`]);
-    notice(`run完git commit子进程颜色没有丢失`);
+    // notice(`run完git commit子进程颜色没有丢失`);
   } else {
     notice('\n没有更新的文件');
   }
 
-  await run(`git`, [`push`]);
+  // await run(`git`, [`push`]);
   step('\n切换到 dev 分支并拉取最新代码');
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
