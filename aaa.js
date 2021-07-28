@@ -29,7 +29,7 @@ async function main() {
     await run(`git-cz`);
   } else notice(`没有更新的文件`);
 
-  await run(`git`, [`push`], { stdio: `inherit` });
+  await run(`git`, [`push`]); // win 下使用 inherit 会导致 chalk 丢失颜色，要使用pipe解决；macOS 下不会发生这个问题
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
@@ -39,7 +39,7 @@ async function main() {
   await run(`git`, [`merge`, currentBranch]);
   success(`合并到 dev 分支完成`);
   step(`推送到远端`);
-  await run(`git`, [`push`], { stdio: `inherit` });
+  await run(`git`, [`push`]); // win 下使用 inherit 会导致 chalk 丢失颜色，要使用pipe解决；macOS 下不会发生这个问题
   success(`推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
   return;
 }
