@@ -21,10 +21,11 @@ async function main() {
     error(`当前处在 ${currentBranch} 分支，请切换到功能分支`);
     return;
   }
+
   const { stdout } = await run(`git`, [`diff`], { stdio: `pipe` });
   if (stdout) {
     step(`添加 git 追踪`);
-    await run(`git`, [`add`, `-A`]);
+    await run(`git`, [`add`, `.`]);
     await run(`git-cz`);
   } else notice(`没有更新的文件`);
 
