@@ -41,7 +41,7 @@ async function main() {
 
   success(`推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
 
-  step(`切换回到 ${branch} 分支`);
+  step(`切换回到 ${currentBranch} 分支`);
   await run(`git`, [`checkout`, currentBranch]);
 
   success(`发布测试环境完成`);
