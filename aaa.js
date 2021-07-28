@@ -23,13 +23,13 @@ const getGitBranch = () => {
 async function main() {
   const currentBranch = getGitBranch();
 
-  step(`添加 git 追踪`);
+  step(`\n添加 git 追踪`);
   await run(`git`, [`add`, `.`]);
   await run(`git-cz`);
   // await run(`git`, [`commit`, `-m`, `111`]);
   await run(`git`, [`push`]); //
   // 切换到 dev 分支并拉取最新代码
-  step(`切换到 dev 分支并拉取最新代码`);
+  step(`\n切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
 
@@ -39,15 +39,15 @@ async function main() {
   await run(`git`, [`merge`, currentBranch]);
 
   // 推送dev
-  step(`合并到 dev 分支完成，推送到远端`);
+  step(`\n合并到 dev 分支完成，推送到远端`);
   await run(`git`, [`push`]);
 
-  success(`推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
+  success(`\n推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
 
-  step(`切换回到 ${currentBranch} 分支`);
+  step(`\n切换回到 ${currentBranch} 分支`);
   await run(`git`, [`checkout`, currentBranch]);
 
-  success(`发布测试环境完成`);
+  success(`\n发布测试环境完成`);
   return;
 }
 
