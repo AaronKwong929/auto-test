@@ -14,12 +14,12 @@ const run = (bin, args, opts = {}) =>
 const getGitBranch = () =>
   execa.commandSync('git rev-parse --abbrev-ref HEAD').stdout;
 
-  
 async function main() {
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
   if (stdout) {
     step('\n添加 git 追踪');
     await run(`git`, [`add`, `-A`]);
+    notice(`run完git子进程颜色丢失`);
     // await run(`git-cz`);
     await run(`git`, [`commit`, `-m`, `111`]);
   } else {
