@@ -32,6 +32,7 @@ async function main() {
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
+  success(`拉取 dev 分支代码完成`);
 
   // 合并提交分支
   step(`合并到 dev`);
@@ -48,7 +49,7 @@ const currentBranch = getGitBranch();
 main()
   .catch(err => error(err))
   .finally(async () => {
-    step(`\n切换回到 ${currentBranch} 分支`);
+    step(`切换回到 ${currentBranch} 分支`);
     await run(`git`, [`checkout`, currentBranch]);
     return;
   });
