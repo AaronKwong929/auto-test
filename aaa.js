@@ -11,6 +11,9 @@ const error = msg => console.log(chalk.redBright(msg));
 const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: `inherit`, ...opts });
 
+const run2 = (bin, args, opts = {}) =>
+  execa(bin, args, { stdio: `pipe`, ...opts });
+
 const getGitBranch = () =>
   execa.commandSync('git rev-parse --abbrev-ref HEAD').stdout;
 
@@ -27,7 +30,7 @@ async function main() {
     notice('\n没有更新的文件');
   }
 
-  // await run(`git`, [`push`]);
+  await run2(`git`, [`push`]);
   step('\n切换到 dev 分支并拉取最新代码');
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
@@ -39,7 +42,7 @@ async function main() {
   success('\n合并到 dev 分支完成');
 
   step('\n推送到远端');
-  await run(`git`, [`push`]);
+  await run2(`git`, [`push`]);
 
   success('\n推送 dev 完成，稍后 Jenkins 将启动构建并通知');
 
