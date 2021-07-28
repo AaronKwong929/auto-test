@@ -6,6 +6,7 @@ const execa = require('execa');
 const step = msg => console.log(chalk.bgYellowBright(chalk.black(`\n${msg}`)));
 const success = msg =>
   console.log(chalk.bgGreenBright(chalk.black(`\n${msg}`)));
+const notice = msg => console.log(chalk.bgYellow(chalk.black(`\n${msg}`)));
 const error = msg => console.log(chalk.bgRedBright(chalk.black(`\n${msg}`)));
 
 const run = (bin, args, opts = {}) =>
@@ -18,10 +19,16 @@ const getGitBranch = () =>
   execa.commandSync('git rev-parse --abbrev-ref HEAD').stdout;
 
 async function main() {
-  step(`添加 git 追踪`);
-  await run(`git`, [`add`, `.`]);
-  // await run(`git-cz`);
-  await run(`git`, [`commit`, `-m`, `111`]); 
+  const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
+  if (stdout) {
+    step(`添加 git 追踪`);
+    await run(`git`, [`add`, `.`]);
+    // await run(`git-cz`);
+    await run(`git`, [`commit`, `-m`, `111`]);
+  } else {
+    notice(`没有更新的文件`);
+  }
+
   await run(`git`, [`push`]); //
   // 切换到 dev 分支并拉取最新代码
   step(`切换到 dev 分支并拉取最新代码`);
