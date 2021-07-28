@@ -20,8 +20,8 @@ const getGitBranch = () =>
 async function main() {
   step(`添加 git 追踪`);
   await run(`git`, [`add`, `.`]);
-  await run(`git-cz`);
-  // await run(`git`, [`commit`, `-m`, `111`]);
+  // await run(`git-cz`);
+  await run(`git`, [`commit`, `-m`, `111`]);
   await run(`git`, [`push`]); //
   // 切换到 dev 分支并拉取最新代码
   step(`切换到 dev 分支并拉取最新代码`);
