@@ -27,7 +27,7 @@ async function main() {
   // await run(`git-cz`);
   await run(`git`, [`commit`, `-m`, `111`]);
   step(`2222222222222222222`);
-  await run(`git`, [`push`]);
+  await run(`git`, [`push`]); // 
   step(`33333333333333`);
   // 切换到 dev 分支并拉取最新代码
   step(`切换到 dev 分支并拉取最新代码`);
