@@ -1,10 +1,10 @@
 const chalk = require('chalk');
 const execa = require('execa');
 
-const step = msg => console.log(chalk.yellowBright(msg));
-const success = msg => console.log(chalk.greenBright(msg));
-const notice = msg => console.log(chalk.yellow(msg));
-const error = msg => console.log(chalk.redBright(msg));
+const step = msg => console.log(chalk.bgYellowBright(chalk.black(msg)));
+const success = msg => console.log(chalk.bgGreenBright(chalk.black(msg)));
+const notice = msg => console.log(chalk.bgYellow(chalk.black(msg)));
+const error = msg => console.log(chalk.bgRedBright(chalk.black(msg)));
 
 const run = (bin, args = [], opts = { stdio: `inherit` }) =>
   execa(bin, args, opts);
@@ -13,6 +13,10 @@ const getGitBranch = () =>
   execa.commandSync(`git rev-parse --abbrev-ref HEAD`).stdout;
 
 async function main() {
+  if ([`master`, `dev`].includes(currentBranch)) {
+    error(`\n当前处在 ${currentBranch} 分支，请切换到功能分支`);
+    return;
+  }
   const { stdout } = await run(`git`, [`diff`], { stdio: `pipe` });
   if (stdout) {
     step(`\n添加 git 追踪`);
@@ -38,10 +42,9 @@ async function main() {
 const currentBranch = getGitBranch();
 
 main()
-  .catch(async err => {
-    error(err);
-  })
+  .catch(err => error(err))
   .finally(async () => {
     step(`\n切换回到 ${currentBranch} 分支`);
     await run(`git`, [`checkout`, currentBranch]);
+    return;
   });
