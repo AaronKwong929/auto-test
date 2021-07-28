@@ -29,7 +29,7 @@ async function main() {
     await run(`git-cz`);
   } else notice(`没有更新的文件`);
 
-  await run(`git`, [`push`], { stdio: `pipe` });
+  await run(`git`, [`push`], { stdio: `inherit` });
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
@@ -39,8 +39,7 @@ async function main() {
   await run(`git`, [`merge`, currentBranch]);
   success(`合并到 dev 分支完成`);
   step(`推送到远端`);
-  const res = await run(`git`, [`push`], { stdio: `pipe` });
-  console.log(`jjjjjjjjj`, res.stdout);
+  await run(`git`, [`push`], { stdio: `inherit` });
   success(`推送 dev 完成，稍后 Jenkins 将启动构建并通知`);
   return;
 }
