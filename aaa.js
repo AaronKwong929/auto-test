@@ -30,6 +30,7 @@ async function main() {
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
+
   // TODO: 处理发生冲突的情况
 
   // 合并提交分支
