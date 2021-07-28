@@ -20,8 +20,8 @@ async function main() {
     step('\n添加 git 追踪');
     await run(`git`, [`add`, `-A`]);
 
-    // await run(`git-cz`);
-    await run(`git`, [`commit`, `-m`, `111`]);
+    await run(`git-cz`);
+    // await run(`git`, [`commit`, `-m`, `111`]);
     notice(`run完git commit子进程颜色没有丢失`);
   } else {
     notice('\n没有更新的文件');
