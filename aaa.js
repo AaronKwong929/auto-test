@@ -23,14 +23,16 @@ async function main() {
 
   step(`添加 git 追踪`);
   await run(`git`, [`add`, `.`]);
-  step(`abba`)
+  step(`1111111111111111`);
   // await run(`git-cz`);
-  await run(`git`, [`commit`, `-m`, `111`])
+  await run(`git`, [`commit`, `-m`, `111`]);
+  step(`2222222222222222222`);
   await run(`git`, [`push`]);
-
+  step(`33333333333333`);
   // 切换到 dev 分支并拉取最新代码
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
+  step(`4444444444`);
   await run(`git`, [`pull`, `origin`, `dev`]);
 
   // TODO: 处理发生冲突的情况
