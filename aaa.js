@@ -32,6 +32,7 @@ async function main() {
   step(`切换到 dev 分支并拉取最新代码`);
   await run(`git`, [`checkout`, `dev`]);
   await run(`git`, [`pull`, `origin`, `dev`]);
+  success(`拉取 dev 分支代码完成`);
 
   step(`合并到 dev`);
   await run(`git`, [`merge`, currentBranch]);
