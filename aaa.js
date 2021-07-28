@@ -3,10 +3,10 @@ const execa = require('execa');
 // const { prompt } = require('enquirer');
 
 // const versionRegex = /^\d+\.\d+\.\d+$/;
-const step = msg => console.log(chalk.bgYellowBright(msg));
-const success = msg => console.log(chalk.bgGreenBright(msg));
-const notice = msg => console.log(chalk.bgYellow(msg));
-const error = msg => console.log(chalk.bgRedBright(msg));
+const step = msg => console.log(chalk.yellowBright(msg));
+const success = msg => console.log(chalk.greenBright(msg));
+const notice = msg => console.log(chalk.yellow(msg));
+const error = msg => console.log(chalk.redBright(msg));
 
 const run = (bin, args, opts = {}) =>
   execa(bin, args, { stdio: `inherit`, ...opts });
