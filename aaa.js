@@ -3,16 +3,13 @@ const execa = require('execa');
 // const { prompt } = require('enquirer');
 
 // const versionRegex = /^\d+\.\d+\.\d+$/;
-const step = msg => console.log(chalk.bgYellowBright(chalk.black(msg)));
-const success = msg => console.log(chalk.bgGreenBright(chalk.black(msg)));
-const notice = msg => console.log(chalk.bgYellow(chalk.black(msg)));
-const error = msg => console.log(chalk.bgRedBright(chalk.black(msg)));
+const step = msg => console.log(chalk.bgYellowBright(msg));
+const success = msg => console.log(chalk.bgGreenBright(msg));
+const notice = msg => console.log(chalk.bgYellow(msg));
+const error = msg => console.log(chalk.bgRedBright(msg));
 
 const run = (bin, args, opts = {}) =>
-  execa(bin, args, {
-    stdio: `inherit`,
-    ...opts,
-  });
+  execa(bin, args, { stdio: `inherit`, ...opts });
 
 const getGitBranch = () =>
   execa.commandSync('git rev-parse --abbrev-ref HEAD').stdout;
@@ -21,7 +18,7 @@ async function main() {
   const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
   if (stdout) {
     step('\n添加 git 追踪');
-    await run(`git`, [`add`, `.`]);
+    await run(`git`, [`add`, `-A`]);
     // await run(`git-cz`);
     await run(`git`, [`commit`, `-m`, `111`]);
   } else {
