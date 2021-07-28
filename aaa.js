@@ -29,7 +29,7 @@ async function main() {
 
   step(`添加 git 追踪`);
   await run(`git`, [`add`, `.`]);
-  await run(`git`, [`cz`]);
+  await run(`git-cz`);
   // await run(`git`, [`commit`, `-m`, message]);
   // await run(`git`, [`push`]);
 
